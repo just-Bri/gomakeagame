@@ -51,7 +51,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</h1></div><p class=\"tagline\"><strong>Go Make A Game</strong> — a 2D+3D capable game engine written in Go.<br>Code-focused today. A full IDE and editor down the road.</p></header><section><h2>About</h2><div class=\"cards-grid\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</h1></div><p class=\"tagline\"><strong>Go Make A Game</strong><br>is a 2D+3D capable game engine written in Go.<br>Code-focused today, full IDE and Editor in the future.</p></header><section><h2>About</h2><div class=\"cards-grid\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

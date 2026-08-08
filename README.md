@@ -27,6 +27,12 @@ Nothing is set in stone yet. Libraries under consideration:
 
 More will be added as the engine takes shape.
 
+## Using AI
+
+Will AI help build this engine? Yes.
+
+I really enjoy programming — actually writing code — and problem solving. But for boilerplate, docs, and other repetitive work (like this README), I'll lean on different AI models for convenience and speed. The interesting parts stay human-driven.
+
 ## Status
 
 **Very early.** This repo is just getting started — no engine code yet, just the foundation. Expect things to move quickly (and break often) as the project grows.

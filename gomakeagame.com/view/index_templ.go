@@ -43,7 +43,15 @@ func Index() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<header><div class=\"logo-container\">GM</div><h1>Go Make A Game</h1><p class=\"tagline\"><strong>Gomag</strong> — a 2D+3D capable game engine written in Go.<br>Code-focused today. A full IDE and editor down the road.</p></header><section><h2>About</h2><div class=\"cards-grid\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<header><div class=\"logo-wrap\"><h1>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = components.Logo().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</h1></div><p class=\"tagline\"><strong>Go Make A Game</strong> — a 2D+3D capable game engine written in Go.<br>Code-focused today. A full IDE and editor down the road.</p></header><section><h2>About</h2><div class=\"cards-grid\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -55,7 +63,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></section><section><h2>Planned Stack</h2><div class=\"cards-grid\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></section><section><h2>Planned Stack</h2><div class=\"cards-grid\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -71,7 +79,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></section><section><h2>Status <span class=\"status-badge\">Very Early</span></h2><div class=\"cards-grid\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></section><section><h2>Status <span class=\"status-badge\">Very Early</span></h2><div class=\"cards-grid\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -83,7 +91,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></section><footer><p>Go Make A Game &copy; 2026 just_Bri</p><p>Built with <a href=\"https://htmx.org/\" target=\"_blank\">htmx</a>, <a href=\"https://templ.guide/\" target=\"_blank\">templ</a>, and <a href=\"https://missing.style/\" target=\"_blank\">missing.css</a></p></footer>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></section><footer><p>Go Make A Game &copy; 2026 just_Bri</p><p>Built with <a href=\"https://htmx.org/\" target=\"_blank\">htmx</a>, <a href=\"https://templ.guide/\" target=\"_blank\">templ</a>, and <a href=\"https://missing.style/\" target=\"_blank\">missing.css</a></p></footer>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

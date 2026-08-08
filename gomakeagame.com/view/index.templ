@@ -5,10 +5,13 @@ import "github.com/just-Bri/gomakeagame/gomakeagame.com/view/components"
 templ Index() {
 	@Layout("Go Make A Game | Gomag") {
 		<header>
-			<div class="logo-container">GM</div>
-			<h1>Go Make A Game</h1>
+			<div class="logo-wrap">
+				<h1>
+					@components.Logo()
+				</h1>
+			</div>
 			<p class="tagline">
-				<strong>Gomag</strong> — a 2D+3D capable game engine written in Go.<br/>
+				<strong>Go Make A Game</strong> — a 2D+3D capable game engine written in Go.<br/>
 				Code-focused today. A full IDE and editor down the road.
 			</p>
 		</header>

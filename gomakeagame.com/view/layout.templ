@@ -7,11 +7,12 @@ templ Layout(title string) {
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>{ title }</title>
+			<link rel="icon" href="/static/img/favicon.png" type="image/png"/>
 			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 			<link rel="stylesheet" href="https://unpkg.com/missing.css@1.1.1"/>
 			<link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet"/>
+			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@700&family=Outfit:wght@400;700&display=swap" rel="stylesheet"/>
 			<style>
 				:root {
 					--main-font: 'Inter', sans-serif;
@@ -34,31 +35,21 @@ templ Layout(title string) {
 				header {
 					text-align: center;
 					margin-bottom: 4rem;
+					width: 100%;
 				}
-				.logo-container {
-					display: inline-flex;
-					align-items: center;
+				.logo-wrap {
+					display: flex;
 					justify-content: center;
-					width: 6rem;
-					height: 6rem;
-					border-radius: 1.25rem;
-					background: linear-gradient(135deg, #34d399, #3b82f6);
+					width: 100%;
 					margin-bottom: 1.5rem;
-					font-family: var(--title-font);
-					font-size: 1.75rem;
-					font-weight: 700;
-					color: #000;
-					letter-spacing: -0.05em;
+				}
+				.logo {
+					display: block;
+					width: min(100%, 18rem);
+					height: auto;
 				}
 				h1 {
-					font-family: var(--title-font);
-					font-size: 3.5rem;
-					font-weight: 700;
-					letter-spacing: -0.05em;
-					background: linear-gradient(to right, #34d399, #60a5fa);
-					-webkit-background-clip: text;
-					-webkit-text-fill-color: transparent;
-					margin-bottom: 1rem;
+					margin: 0;
 				}
 				.tagline {
 					font-size: 1.25rem;

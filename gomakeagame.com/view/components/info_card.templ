@@ -1,0 +1,11 @@
+package components
+
+templ InfoCard(label, title, description string) {
+	<div class="card">
+		if label != "" {
+			<span class="label">{ label }</span>
+		}
+		<h3>{ title }</h3>
+		<p>{ description }</p>
+	</div>
+}

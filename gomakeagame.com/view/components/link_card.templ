@@ -1,0 +1,11 @@
+package components
+
+templ LinkCard(name, url, description string) {
+	<a href={ templ.SafeURL(url) } target="_blank" class="card">
+		<div style="display: flex; justify-content: space-between; align-items: start;">
+			<h3>{ name }</h3>
+			<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+		</div>
+		<p>{ description }</p>
+	</a>
+}

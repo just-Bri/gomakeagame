@@ -1,0 +1,174 @@
+package view
+
+templ Layout(title string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>{ title }</title>
+			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+			<link rel="stylesheet" href="https://unpkg.com/missing.css@1.1.1"/>
+			<link rel="preconnect" href="https://fonts.googleapis.com"/>
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet"/>
+			<style>
+				:root {
+					--main-font: 'Inter', sans-serif;
+					--title-font: 'Outfit', sans-serif;
+					--bg: #050505;
+					--fg: #f3f4f6;
+					--accent: #34d399;
+				}
+				body {
+					background: radial-gradient(circle at 10% 20%, #0a0a0a 0%, #000 90%);
+					min-height: 100vh;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					padding: 2rem;
+					font-family: var(--main-font);
+					color: var(--fg);
+				}
+				header {
+					text-align: center;
+					margin-bottom: 4rem;
+				}
+				.logo-container {
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+					width: 6rem;
+					height: 6rem;
+					border-radius: 1.25rem;
+					background: linear-gradient(135deg, #34d399, #3b82f6);
+					margin-bottom: 1.5rem;
+					font-family: var(--title-font);
+					font-size: 1.75rem;
+					font-weight: 700;
+					color: #000;
+					letter-spacing: -0.05em;
+				}
+				h1 {
+					font-family: var(--title-font);
+					font-size: 3.5rem;
+					font-weight: 700;
+					letter-spacing: -0.05em;
+					background: linear-gradient(to right, #34d399, #60a5fa);
+					-webkit-background-clip: text;
+					-webkit-text-fill-color: transparent;
+					margin-bottom: 1rem;
+				}
+				.tagline {
+					font-size: 1.25rem;
+					color: #9ca3af;
+					max-width: 36rem;
+					margin: 0 auto 2rem;
+					line-height: 1.6;
+				}
+				.social-links {
+					display: flex;
+					justify-content: center;
+					gap: 1.5rem;
+				}
+				.social-links a {
+					color: #9ca3af;
+					transition: color 0.3s;
+				}
+				.social-links a:hover {
+					color: #fff;
+				}
+				.cards-grid {
+					display: grid;
+					grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+					gap: 1.5rem;
+					width: 100%;
+					max-width: 900px;
+				}
+				.card {
+					background: rgba(255, 255, 255, 0.03);
+					backdrop-filter: blur(10px);
+					border: 1px solid rgba(255, 255, 255, 0.1);
+					padding: 2rem;
+					border-radius: 1rem;
+					transition: all 0.3s;
+					text-decoration: none;
+					color: inherit;
+					display: block;
+				}
+				a.card:hover {
+					background: rgba(255, 255, 255, 0.08);
+					transform: translateY(-4px);
+					border-color: rgba(255, 255, 255, 0.2);
+				}
+				.card h3 {
+					margin-top: 0;
+					font-size: 1.25rem;
+					color: #fff;
+					margin-bottom: 0.75rem;
+				}
+				.card p {
+					color: #9ca3af;
+					margin-bottom: 0;
+					line-height: 1.6;
+				}
+				.card .label {
+					display: inline-block;
+					font-size: 0.75rem;
+					font-weight: 600;
+					text-transform: uppercase;
+					letter-spacing: 0.05em;
+					color: #34d399;
+					margin-bottom: 0.5rem;
+				}
+				section {
+					margin-bottom: 3rem;
+					width: 100%;
+					max-width: 900px;
+				}
+				section h2 {
+					font-family: var(--title-font);
+					font-size: 1.5rem;
+					margin-bottom: 2rem;
+					display: flex;
+					align-items: center;
+					gap: 1rem;
+				}
+				section h2::after {
+					content: "";
+					flex-grow: 1;
+					height: 1px;
+					background: linear-gradient(to right, rgba(255,255,255,0.1), transparent);
+				}
+				.status-badge {
+					display: inline-block;
+					padding: 0.25rem 0.75rem;
+					border-radius: 9999px;
+					background: rgba(52, 211, 153, 0.15);
+					border: 1px solid rgba(52, 211, 153, 0.3);
+					color: #34d399;
+					font-size: 0.875rem;
+					font-weight: 600;
+				}
+				footer {
+					margin-top: 4rem;
+					color: #4b5563;
+					font-size: 0.875rem;
+					text-align: center;
+				}
+				footer a {
+					color: #6b7280;
+				}
+				footer a:hover {
+					color: #9ca3af;
+				}
+			</style>
+		</head>
+		<body>
+			<main class="container">
+				{ children... }
+			</main>
+		</body>
+	</html>
+}

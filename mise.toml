@@ -1,0 +1,14 @@
+[tools]
+go = "1.26.5"
+"go:github.com/a-h/templ/cmd/templ" = "latest"
+"go:github.com/air-verse/air" = "latest"
+
+[tasks.site]
+description = "Run the gomakeagame.com website locally"
+dir = "gomakeagame.com"
+run = "templ generate && go run ."
+
+[tasks.air]
+description = "Run the website with hot reload"
+dir = "gomakeagame.com"
+run = "air"

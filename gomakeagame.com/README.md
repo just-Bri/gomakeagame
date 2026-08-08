@@ -4,6 +4,16 @@ The website for [Go Make A Game](https://gomakeagame.com), built with Go, [templ
 
 ## Setup
 
+From the repo root (with [mise](https://mise.jdx.dev/) installed):
+
+```bash
+mise install
+mise run site   # http://localhost:8080
+mise run air    # hot reload
+```
+
+Or manually:
+
 ```bash
 # Install templ
 go install github.com/a-h/templ/cmd/templ@latest
@@ -18,6 +28,12 @@ templ generate && go run .
 The server listens on `PORT` (default `8080`).
 
 ## Dev with hot reload
+
+```bash
+mise run air
+```
+
+Or manually:
 
 ```bash
 # Install air

@@ -37,6 +37,12 @@ I really enjoy programming — actually writing code — and problem solving. Bu
 
 **Very early.** This repo is just getting started — no engine code yet, just the foundation. Expect things to move quickly (and break often) as the project grows.
 
+## Monorepo
+
+| Path | Description |
+|------|-------------|
+| [`gomakeagame.com/`](gomakeagame.com/) | Website (Go + templ + htmx + missing.css) |
+
 ## License
 
 [MIT](LICENSE) — Copyright (c) 2026 just_Bri

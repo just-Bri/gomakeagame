@@ -6,7 +6,7 @@ go = "1.26.5"
 [tasks.site]
 description = "Run the gomakeagame.com website locally"
 dir = "gomakeagame.com"
-run = "templ generate && go run ."
+run = ["templ generate", "go run ."]
 
 [tasks.air]
 description = "Run the website with hot reload"

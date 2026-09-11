@@ -1,5 +1,5 @@
 [tools]
-go = "1.26.5"
+go = "1.27.1"
 "go:github.com/a-h/templ/cmd/templ" = "latest"
 "go:github.com/air-verse/air" = "latest"
 
@@ -12,3 +12,16 @@ run = ["templ generate", "go run ."]
 description = "Run the website with hot reload"
 dir = "gomakeagame.com"
 run = "air"
+
+[tasks.hello2d]
+description = "Run the engine gogpu+gg smoke window"
+dir = "engine"
+env = { CGO_ENABLED = "0" }
+run = "go run ./examples/hello2d"
+
+[tasks.engine-test]
+description = "Run engine unit tests (CGO off)"
+dir = "engine"
+env = { CGO_ENABLED = "0" }
+run = "go test ./..."
+

@@ -22,8 +22,8 @@ Nothing is set in stone yet. Libraries under consideration:
 
 | Area | Candidates |
 |------|------------|
-| Graphics / GPU | [gogpu](https://github.com/gogpu/gogpu) |
-| GUI / Editor (future) | [Fyne](https://fyne.io/), possibly Raylib-based tooling |
+| Graphics / GPU | [gogpu](https://github.com/gogpu/gogpu) + [gg](https://github.com/gogpu/gg) via `engine/gfx` (Pure Go, `CGO_ENABLED=0`). `g3d` later for 3D. |
+| GUI / Editor (future) | [gogpu/ui](https://github.com/gogpu/ui), possibly Fyne |
 
 More will be added as the engine takes shape.
 
@@ -35,12 +35,13 @@ I really enjoy programming — actually writing code — and problem solving. Bu
 
 ## Status
 
-**Very early.** This repo is just getting started — no engine code yet, just the foundation. Expect things to move quickly (and break often) as the project grows.
+Very early. Engine has ECS, maze-TD arena/pathing, and a first `gfx` window on gogpu+gg. Expect breakage.
 
 ## Monorepo
 
 | Path | Description |
 |------|-------------|
+| [`engine/`](engine/) | Game engine (pure Go) — ECS, arena TD, gfx (gogpu+gg) |
 | [`gomakeagame.com/`](gomakeagame.com/) | Website (Go + templ + htmx + missing.css) |
 
 ## License

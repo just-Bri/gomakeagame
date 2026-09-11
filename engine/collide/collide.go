@@ -45,3 +45,38 @@ func ClosestHitAlongSegment(ax, ay, bx, by, hitRadius float64, each func(yield f
 	})
 	return id, ok
 }
+
+// CircleHitsCircle reports whether two disks overlap (edges touching counts).
+func CircleHitsCircle(ax, ay, ar, bx, by, br float64) bool {
+	if ar < 0 || br < 0 {
+		return false
+	}
+	dx := ax - bx
+	dy := ay - by
+	r := ar + br
+	return dx*dx+dy*dy <= r*r
+}
+
+// CircleHitsRect reports whether a disk overlaps an axis-aligned rectangle
+// defined by top-left (rx,ry) and size (rw,rh).
+func CircleHitsRect(cx, cy, radius, rx, ry, rw, rh float64) bool {
+	if radius < 0 || rw < 0 || rh < 0 {
+		return false
+	}
+	// Closest point on the rect to the circle center.
+	closestX := cx
+	if closestX < rx {
+		closestX = rx
+	} else if closestX > rx+rw {
+		closestX = rx + rw
+	}
+	closestY := cy
+	if closestY < ry {
+		closestY = ry
+	} else if closestY > ry+rh {
+		closestY = ry + rh
+	}
+	dx := cx - closestX
+	dy := cy - closestY
+	return dx*dx+dy*dy <= radius*radius
+}

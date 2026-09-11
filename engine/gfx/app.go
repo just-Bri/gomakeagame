@@ -15,6 +15,7 @@ package gfx
 
 import (
 	"fmt"
+	"image"
 	"log"
 
 	"github.com/gogpu/gg"
@@ -143,6 +144,14 @@ func (a *App) onDraw(dc *gogpu.Context) {
 		}); err != nil {
 			log.Printf("gfx: draw: %v", err)
 		}
+	}
+
+	// Wayland (and other damage-aware compositors) may only copy FrameDamage
+	// regions to the screen. gg's DrawImage path often under-reports damage,
+	// so continuous games can look frozen except near HUD text. Force a full
+	// present each frame when Continuous is set.
+	if a.cfg.Continuous {
+		a.canvas.SetPresentDamage([]image.Rectangle{image.Rect(0, 0, w, h)})
 	}
 
 	if err := a.canvas.Render(dc.RenderTarget()); err != nil {

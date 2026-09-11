@@ -63,15 +63,11 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></section><section><h2>Planned Stack</h2><div class=\"cards-grid\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div></section><section><h2>Current Stack</h2><div class=\"cards-grid\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = components.InfoCard("Graphics", "gogpu", "GPU rendering and graphics pipeline. Nothing is set in stone yet.").Render(ctx, templ_7745c5c3_Buffer)
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = components.InfoCard("Editor", "Fyne + Raylib", "GUI and editor tooling candidates for the future IDE.").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = components.InfoCard("Graphics", "gogpu + gg", "Pure-Go windowing and 2D rendering via engine/gfx. No CGO.").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -79,7 +75,19 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></section><section><h2>Status <span class=\"status-badge\">Very Early</span></h2><div class=\"cards-grid\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div></section><section><h2>Planned Stack</h2><div class=\"cards-grid\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = components.InfoCard("Editor", "gogpu/ui · Fyne", "GUI and editor tooling candidates for a future IDE.").Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = components.InfoCard("3D", "g3d", "3D path on the same GoGPU family once 2D is solid.").Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></section><section><h2>Status <span class=\"status-badge\">Very Early</span></h2><div class=\"cards-grid\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -91,7 +99,15 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</div></section><footer><p>Go Make A Game &copy; 2026 just_Bri</p><p>Built with <a href=\"https://htmx.org/\" target=\"_blank\">htmx</a>, <a href=\"https://templ.guide/\" target=\"_blank\">templ</a>, and <a href=\"https://missing.style/\" target=\"_blank\">missing.css</a></p></footer>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div></section><section><h2>Games</h2><div class=\"cards-grid\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = components.LinkCard("Let None Through", "https://justagaymergirl.itch.io/let-none-through", "The first game on Gomag — a maze tower defense. Play it on itch.io.").Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</div></section><footer><p>Go Make A Game &copy; 2026 just_Bri</p><p>Built with <a href=\"https://htmx.org/\" target=\"_blank\">htmx</a>, <a href=\"https://templ.guide/\" target=\"_blank\">templ</a>, and <a href=\"https://missing.style/\" target=\"_blank\">missing.css</a></p></footer>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -1,0 +1,56 @@
+# Promote an existing GitHub Release to the repository "latest" badge.
+#
+# Create releases with "Create release" (they are published with latest=false),
+# then run this workflow when you want that tag to be the official latest.
+name: Mark release latest
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing release tag to mark as latest (e.g. engine/v0.1.0)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  mark-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mark release as latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          tag="${TAG#"${TAG%%[![:space:]]*}"}"
+          tag="${tag%"${tag##*[![:space:]]}"}"
+          if [[ -z "$tag" ]]; then
+            echo "::error::tag is empty"
+            exit 1
+          fi
+
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            echo "::error::no release found for tag '$tag'"
+            echo "Available releases:"
+            gh release list --limit 20
+            exit 1
+          fi
+
+          # GitHub only allows non-draft, non-prerelease as latest in normal use.
+          meta=$(gh release view "$tag" --json isDraft,isPrerelease,isLatest,url)
+          echo "$meta" | jq .
+          if [[ "$(jq -r .isDraft <<<"$meta")" == "true" ]]; then
+            echo "::error::cannot mark a draft release as latest"
+            exit 1
+          fi
+          if [[ "$(jq -r .isPrerelease <<<"$meta")" == "true" ]]; then
+            echo "::error::cannot mark a prerelease as latest — publish a stable release first"
+            exit 1
+          fi
+
+          gh release edit "$tag" --latest
+          echo "Marked $tag as latest"
+          gh release view "$tag" --json tagName,isLatest,url

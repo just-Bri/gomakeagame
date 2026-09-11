@@ -26,11 +26,18 @@ templ Index() {
 		</section>
 
 		<section>
+			<h2>Current Stack</h2>
+			<div class="cards-grid">
+				@components.InfoCard("Graphics", "gogpu + gg", "Pure-Go windowing and 2D rendering via engine/gfx. No CGO.")
+				@components.InfoCard("Language", "Go", "The engine, tooling, and runtime — all written in Go.")
+			</div>
+		</section>
+
+		<section>
 			<h2>Planned Stack</h2>
 			<div class="cards-grid">
-				@components.InfoCard("Graphics", "gogpu", "GPU rendering and graphics pipeline. Nothing is set in stone yet.")
-				@components.InfoCard("Editor", "Fyne + Raylib", "GUI and editor tooling candidates for the future IDE.")
-				@components.InfoCard("Language", "Go", "The engine, tooling, and runtime — all written in Go.")
+				@components.InfoCard("Editor", "gogpu/ui · Fyne", "GUI and editor tooling candidates for a future IDE.")
+				@components.InfoCard("3D", "g3d", "3D path on the same GoGPU family once 2D is solid.")
 			</div>
 		</section>
 
@@ -39,6 +46,13 @@ templ Index() {
 			<div class="cards-grid">
 				@components.LinkCard("GitHub", "https://github.com/just-Bri/gomakeagame", "Follow development, read the README, and watch the engine take shape.")
 				@components.InfoCard("", "What's Next", "Architecture, APIs, and tooling are wide open. Expect things to move quickly — and break often — as the project grows.")
+			</div>
+		</section>
+
+		<section>
+			<h2>Games</h2>
+			<div class="cards-grid">
+				@components.LinkCard("Let None Through", "https://justagaymergirl.itch.io/let-none-through", "The first game on Gomag — a maze tower defense. Play it on itch.io.")
 			</div>
 		</section>
 

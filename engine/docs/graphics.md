@@ -59,7 +59,19 @@ app.OnDraw(func(dc *gg.Context, w, h int) {
 app.Run()
 ```
 
-For input / animation tokens / multi-window, use `app.Native()` (`*gogpu.App`).
+For raw input / animation tokens / multi-window, use `app.Native()` (`*gogpu.App`).
+For held keys and press/release edges, prefer `engine/input` (see `docs/input.md`).
+
+### Letterbox (fixed virtual resolution)
+
+```go
+lb := gfx.Fit(float64(w), float64(h), 1280, 800)
+lb.Apply(dc)
+defer dc.Pop()
+// draw in virtual 1280×800 coords…
+```
+
+`ToVirtual` / `ToScreen` convert pointer coordinates across the mapping.
 
 ## Next (later)
 

@@ -19,7 +19,7 @@ type Enemy struct {
 }
 
 func main() {
-	spawns, exit, err := arena.DefaultTopBottom(8, 5)
+	spawns, exits, err := arena.DefaultTopBottom(8, 5)
 	if err != nil {
 		panic(err)
 	}
@@ -28,7 +28,7 @@ func main() {
 		Height:      5,
 		TileSize:    32,
 		Spawns:      spawns,
-		Exit:        exit,
+		Exits:       exits,
 		RequirePath: true,
 		LivePathing: true,
 	})

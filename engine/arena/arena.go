@@ -61,12 +61,12 @@ var (
 type Config struct {
 	Width, Height int
 	TileSize      float64
-	// Spawns are entry cells (typically along the top edge).
+	// Spawns are entry cells (typically a full top strip).
 	Spawns []pathing.Cell
-	// Exit is the creep goal (typically along the bottom edge).
-	Exit pathing.Cell
+	// Exits are creep goals (typically the full bottom row).
+	Exits []pathing.Cell
 	// RequirePath rejects placements (and BeginWave) that seal every
-	// spawn from the exit — Desktop TD / fair-maze style.
+	// spawn from every exit — Desktop TD / fair-maze style.
 	// If false, players may wall off; creeps on sealed tiles simply stall.
 	RequirePath bool
 	// LivePathing rebuilds the flow field after every Place/Unplace in
@@ -93,6 +93,9 @@ func New(cfg Config) (*Arena, error) {
 	if len(cfg.Spawns) == 0 {
 		return nil, ErrNoSpawns
 	}
+	if len(cfg.Exits) == 0 {
+		return nil, fmt.Errorf("arena: no exit cells")
+	}
 	g, err := grid.New(cfg.Width, cfg.Height)
 	if err != nil {
 		return nil, err
@@ -102,8 +105,10 @@ func New(cfg Config) (*Arena, error) {
 			return nil, fmt.Errorf("arena: spawn (%d,%d) out of bounds", s.X, s.Y)
 		}
 	}
-	if !g.InBounds(cfg.Exit.X, cfg.Exit.Y) {
-		return nil, fmt.Errorf("arena: exit (%d,%d) out of bounds", cfg.Exit.X, cfg.Exit.Y)
+	for _, e := range cfg.Exits {
+		if !g.InBounds(e.X, e.Y) {
+			return nil, fmt.Errorf("arena: exit (%d,%d) out of bounds", e.X, e.Y)
+		}
 	}
 
 	a := &Arena{
@@ -118,18 +123,39 @@ func New(cfg Config) (*Arena, error) {
 	return a, nil
 }
 
-// DefaultTopBottom returns spawns along the full top row and a centered
-// bottom-row exit — the classic “enter top, escape bottom” layout.
-func DefaultTopBottom(width, height int) (spawns []pathing.Cell, exit pathing.Cell, err error) {
+// DefaultTopBottom returns spawns along the full top row and exits along
+// the full bottom row — the classic “enter top, escape bottom” layout.
+func DefaultTopBottom(width, height int) (spawns, exits []pathing.Cell, err error) {
+	return VerticalPlayfield(width, height, 1)
+}
+
+// VerticalPlayfield is the Matrix Defense–style map:
+// a vertical rectangle, a horizontal spawn strip of spawnRows at the top,
+// and a full-width exit strip on the bottom row.
+//
+// Players typically build horizontal walls left→right then right→left,
+// leaving a one-cell gap on alternating ends so creeps snake downward.
+func VerticalPlayfield(width, height, spawnRows int) (spawns, exits []pathing.Cell, err error) {
 	if width <= 0 || height <= 0 {
-		return nil, pathing.Cell{}, fmt.Errorf("arena: invalid size %dx%d", width, height)
+		return nil, nil, fmt.Errorf("arena: invalid size %dx%d", width, height)
 	}
-	spawns = make([]pathing.Cell, width)
+	if spawnRows <= 0 {
+		return nil, nil, fmt.Errorf("arena: spawnRows must be positive")
+	}
+	if spawnRows >= height {
+		return nil, nil, fmt.Errorf("arena: spawnRows %d leaves no room for build/exit (height %d)", spawnRows, height)
+	}
+	spawns = make([]pathing.Cell, 0, width*spawnRows)
+	for y := 0; y < spawnRows; y++ {
+		for x := 0; x < width; x++ {
+			spawns = append(spawns, pathing.Cell{X: x, Y: y})
+		}
+	}
+	exits = make([]pathing.Cell, 0, width)
 	for x := 0; x < width; x++ {
-		spawns[x] = pathing.Cell{X: x, Y: 0}
+		exits = append(exits, pathing.Cell{X: x, Y: height - 1})
 	}
-	exit = pathing.Cell{X: width / 2, Y: height - 1}
-	return spawns, exit, nil
+	return spawns, exits, nil
 }
 
 // BeginBuild enters (or returns to) build phase. Safe to call at wave end.
@@ -138,7 +164,7 @@ func (a *Arena) BeginBuild() {
 }
 
 // BeginWave locks footprint edits, rebuilds pathing if dirty, and starts
-// the wave. Fails if RequirePath and any spawn cannot reach the exit.
+// the wave. Fails if RequirePath and any spawn cannot reach an exit.
 func (a *Arena) BeginWave() error {
 	if a.Phase == PhaseWave {
 		return nil
@@ -168,7 +194,7 @@ func (a *Arena) SyncPathing() error {
 	if !a.dirty && a.Field != nil {
 		return nil
 	}
-	f, err := pathing.Rebuild(a.Grid, a.Config.Exit.X, a.Config.Exit.Y)
+	f, err := pathing.RebuildFromExits(a.Grid, a.Config.Exits)
 	if err != nil {
 		return err
 	}
@@ -177,10 +203,10 @@ func (a *Arena) SyncPathing() error {
 	return nil
 }
 
-// SpawnsReachable reports whether every configured spawn can reach the exit
+// SpawnsReachable reports whether every configured spawn can reach an exit
 // on the *current* grid (cheap BFS; does not require a fresh Field).
 func (a *Arena) SpawnsReachable() bool {
-	return pathing.SpawnsCanReachExit(a.Grid, a.Config.Spawns, a.Config.Exit)
+	return pathing.SpawnsCanReachExit(a.Grid, a.Config.Spawns, a.Config.Exits)
 }
 
 // CanPlace reports whether footprint may be blocked in the current build.

@@ -11,7 +11,7 @@ import (
 
 func newTestArena(t *testing.T, requirePath, live bool) *arena.Arena {
 	t.Helper()
-	spawns, exit, err := arena.DefaultTopBottom(8, 6)
+	spawns, exits, err := arena.DefaultTopBottom(8, 6)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -20,7 +20,7 @@ func newTestArena(t *testing.T, requirePath, live bool) *arena.Arena {
 		Height:      6,
 		TileSize:    32,
 		Spawns:      spawns,
-		Exit:        exit,
+		Exits:       exits,
 		RequirePath: requirePath,
 		LivePathing: live,
 	})
@@ -145,6 +145,29 @@ func TestLivePathingClearsDirty(t *testing.T) {
 	}
 	if a.Field == nil {
 		t.Fatal("expected field after live place")
+	}
+}
+
+func TestVerticalPlayfieldSpawnStrip(t *testing.T) {
+	spawns, exits, err := arena.VerticalPlayfield(11, 24, 2)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(spawns) != 22 {
+		t.Fatalf("spawns = %d, want 22", len(spawns))
+	}
+	if len(exits) != 11 {
+		t.Fatalf("exits = %d, want 11", len(exits))
+	}
+	for _, e := range exits {
+		if e.Y != 23 {
+			t.Fatalf("exit outside bottom row: %+v", e)
+		}
+	}
+	for _, s := range spawns {
+		if s.Y >= 2 {
+			t.Fatalf("spawn outside strip: %+v", s)
+		}
 	}
 }
 

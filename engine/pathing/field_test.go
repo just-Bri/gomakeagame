@@ -159,3 +159,27 @@ func TestDirectionUnitLength(t *testing.T) {
 		t.Fatal("exit should not report a move direction")
 	}
 }
+
+func TestPreferDownOverSideways(t *testing.T) {
+	// Open 5×5 with full bottom exit strip. From (0,2), Dist to exit is 2
+	// via (0,3)→(0,4) or via sideways then down. Prefer straight down.
+	g := openGrid(t, 5, 5)
+	exits := make([]pathing.Cell, 5)
+	for x := 0; x < 5; x++ {
+		exits[x] = pathing.Cell{X: x, Y: 4}
+	}
+	f, err := pathing.RebuildFromExits(g, exits)
+	if err != nil {
+		t.Fatal(err)
+	}
+	nx, ny, ok := f.Next(0, 2)
+	if !ok {
+		t.Fatal("expected next")
+	}
+	if nx != 0 || ny != 3 {
+		t.Fatalf("Next(0,2)=(%d,%d), want (0,3) straight down", nx, ny)
+	}
+	if f.Dist(0, 3) != 1 || f.Dist(2, 4) != 0 {
+		t.Fatalf("unexpected dists: (0,3)=%d (2,4)=%d", f.Dist(0, 3), f.Dist(2, 4))
+	}
+}

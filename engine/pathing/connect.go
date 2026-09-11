@@ -49,14 +49,21 @@ func CanReach(g *grid.Grid, sx, sy, tx, ty int) bool {
 	return false
 }
 
-// SpawnsCanReachExit reports whether every spawn can reach the exit.
-// Empty spawn lists return false.
-func SpawnsCanReachExit(g *grid.Grid, spawns []Cell, exit Cell) bool {
-	if len(spawns) == 0 {
+// SpawnsCanReachExit reports whether every spawn can reach at least one exit.
+// Empty spawn or exit lists return false.
+func SpawnsCanReachExit(g *grid.Grid, spawns []Cell, exits []Cell) bool {
+	if len(spawns) == 0 || len(exits) == 0 {
 		return false
 	}
 	for _, s := range spawns {
-		if !CanReach(g, s.X, s.Y, exit.X, exit.Y) {
+		ok := false
+		for _, e := range exits {
+			if CanReach(g, s.X, s.Y, e.X, e.Y) {
+				ok = true
+				break
+			}
+		}
+		if !ok {
 			return false
 		}
 	}

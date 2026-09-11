@@ -29,14 +29,14 @@ func TestSpawnsCanReachExit(t *testing.T) {
 		t.Fatal(err)
 	}
 	spawns := []pathing.Cell{{0, 0}, {3, 0}}
-	exit := pathing.Cell{X: 1, Y: 3}
-	if !pathing.SpawnsCanReachExit(g, spawns, exit) {
+	exits := []pathing.Cell{{X: 1, Y: 3}}
+	if !pathing.SpawnsCanReachExit(g, spawns, exits) {
 		t.Fatal("expected reachable")
 	}
 	for x := 0; x < 4; x++ {
 		g.SetBlocked(x, 1, true)
 	}
-	if pathing.SpawnsCanReachExit(g, spawns, exit) {
+	if pathing.SpawnsCanReachExit(g, spawns, exits) {
 		t.Fatal("expected sealed")
 	}
 }

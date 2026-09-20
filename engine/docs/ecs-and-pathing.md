@@ -19,7 +19,7 @@ tower defense (Matrix Defense / Desktop TD inspired). Read this before extending
 |---------|------|
 | `ecs/` | Generational entities, sparse-set `Store[T]`, `Join2`/`Join3` |
 | `grid/` | Tile walkability, `Rect` footprints, world↔cell |
-| `pathing/` | Flow field `Rebuild`, `Trace` / `CorridorFrom`, `CanReach` / `SpawnsCanReachExit` |
+| `pathing/` | Flow field `Rebuild`, `Trace` / `CorridorFrom`, `CanReach` / `FindPath`, `SpawnsCanReachExit` |
 | `move/` | Generic `Agent` + `Transform` + `FollowFlow` |
 | `arena/` | Build↔wave phase, Place/Pickup/Move, dirty pathing sync |
 | `examples/towerdefense/` | Headless maze + wave smoke demo |

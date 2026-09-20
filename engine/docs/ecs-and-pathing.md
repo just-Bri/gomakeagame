@@ -19,7 +19,7 @@ tower defense (Matrix Defense / Desktop TD inspired). Read this before extending
 |---------|------|
 | `ecs/` | Generational entities, sparse-set `Store[T]`, `Join2`/`Join3` |
 | `grid/` | Tile walkability, `Rect` footprints, world↔cell |
-| `pathing/` | Flow field `Rebuild`, `CanReach` / `SpawnsCanReachExit` |
+| `pathing/` | Flow field `Rebuild`, `Trace` / `CorridorFrom`, `CanReach` / `SpawnsCanReachExit` |
 | `move/` | Generic `Agent` + `Transform` + `FollowFlow` |
 | `arena/` | Build↔wave phase, Place/Pickup/Move, dirty pathing sync |
 | `examples/towerdefense/` | Headless maze + wave smoke demo |
@@ -75,10 +75,10 @@ a.BeginBuild() // after wave
 ## Next steps
 
 1. ~~grid / pathing / move / arena build phase~~ **done**
-2. **`let_none_through` bootstrap** — module on engine; building defs with footprints; place/pickup UX state
-3. **Cell occupancy** (optional engine helper) — `entity` per blocked cell for click-to-pick-up
-4. **Targeting** when shooting towers exist — range query over enemies (game or `engine/spatial`)
-5. **Defer:** window/GPU, input, editor, fancy ECS
+2. ~~`let_none_through` bootstrap~~ **done** (maze TD consuming arena)
+3. ~~Path corridor helpers (`Trace` / `CorridorFrom`)~~ **done** — maze UI paints forced path
+4. **Targeting** when shooting towers exist — range query over enemies (game or `engine/spatial`) — largely in game already
+5. **Defer:** window/GPU polish, editor, fancy ECS
 
 ## Out of scope right now
 

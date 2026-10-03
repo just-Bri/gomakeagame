@@ -22,3 +22,15 @@ if edges.ConsumeReleased(gpucontext.KeyEscape) { /* pause */ }
 | `Keyboard` | Currently held keys |
 | `Edges` | One-shot press/release latches until consumed |
 | `Wire` | Registers both on an `EventSource` |
+| `Pointer` | Mouse position + held buttons + scroll |
+| `PointerEdges` | One-shot mouse press/release latches |
+| `WirePointer` | Registers pointer state on an `EventSource` |
+
+```go
+ptr := input.NewPointer()
+pedges := input.NewPointerEdges()
+input.WirePointer(app.EventSource(), ptr, pedges)
+
+x, y := ptr.Pos()
+if pedges.ConsumePressed(gpucontext.MouseButtonLeft) { /* click */ }
+```

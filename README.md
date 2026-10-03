@@ -22,8 +22,8 @@ Nothing is set in stone yet. Libraries under consideration:
 
 | Area | Candidates |
 |------|------------|
-| Graphics / GPU | [gogpu](https://github.com/gogpu/gogpu) + [gg](https://github.com/gogpu/gg) via `engine/gfx` (Pure Go, `CGO_ENABLED=0`). `g3d` later for 3D. |
-| GUI / Editor (future) | [gogpu/ui](https://github.com/gogpu/ui), possibly Fyne |
+| Graphics / GPU | [gogpu](https://github.com/gogpu/gogpu) + [gg](https://github.com/gogpu/gg) via `engine/gfx`; [g3d](https://github.com/gogpu/g3d) via `engine/gfx3d` (Pure Go, `CGO_ENABLED=0`) |
+| GUI / Editor (future) | [gogpu/ui](https://github.com/gogpu/ui), possibly Fyne — until then use `engine/ui` immediate-mode |
 
 More will be added as the engine takes shape.
 
@@ -35,13 +35,15 @@ I really enjoy programming — actually writing code — and problem solving. Bu
 
 ## Status
 
-Very early. Engine has ECS, maze-TD arena/pathing, and a first `gfx` window on gogpu+gg. Expect breakage.
+Very early. Engine has ECS, maze-TD arena/pathing, `gfx` / `gfx3d`,
+presentation helpers (`font`, `ui`, `tilemap`, `camera`, `debug`), and
+Classic-style combat/progress used by Forever Bound. Expect breakage.
 
 ## Monorepo
 
 | Path | Description |
 |------|-------------|
-| [`engine/`](engine/) | Game engine (pure Go) — ECS, arena TD, gfx (gogpu+gg) |
+| [`engine/`](engine/) | Game engine (pure Go) — ECS, arena TD, gfx/gfx3d, UI/tilemap/camera |
 | [`gomakeagame.com/`](gomakeagame.com/) | Website (Go + templ + htmx + missing.css) |
 
 ## License

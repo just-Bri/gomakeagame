@@ -9,9 +9,9 @@ Gomag’s 2D windowing/rendering sits on the [GoGPU](https://github.com/gogpu) e
 | `gogpu` | Window, input, lifecycle |
 | `gg` + `ggcanvas` | 2D draw → present to the window |
 | `wgpu` | GPU API (transitive) |
-| `g3d` | **Not wired yet** — add when a 3D game needs it |
+| `g3d` | Wired via `engine/gfx3d` (pin `g3d@v0.1.7` to match wgpu 0.31.x) |
 
-Engine wrapper: `engine/gfx`.
+Engine wrappers: `engine/gfx` (2D gg) and `engine/gfx3d` (3D g3d).
 
 ## Version pins (important)
 
@@ -73,9 +73,30 @@ defer dc.Pop()
 
 `ToVirtual` / `ToScreen` convert pointer coordinates across the mapping.
 
+### 3D window (`gfx3d`)
+
+```go
+scene := g3d.NewScene()
+camera := g3d.NewPerspectiveCamera(60, 16.0/9.0, 0.1, 200)
+app := gfx3d.New(gfx3d.DefaultConfig())
+app.SetScene(scene, camera)
+app.OnUpdate(func(dt float64) { /* sim */ })
+app.Run()
+```
+
+`g3d` is pinned to **v0.1.7** so it shares the Gomag wgpu 0.31 / gputypes 0.5 line with `gg`. Do not bump to g3d ≥0.1.8 without also re-validating gg.
+
+Smoke:
+
+```bash
+mise run hello3d
+```
+
+Soft-3D / isometric placeholders (no GPU mesh): `engine/project` projects AABB boxes for 2.5D games (Forever Bound).
+
 ## Next (later)
 
 - Sprite/tile batcher owned by Gomag (still on wgpu; gg stays for UI/debug)
 - Wire `let_none_through` to `gfx` once headless sim is solid
-- `g3d` when a 3D title starts
+- Composite gg HUD over gfx3d surfaces
 - Revisit version bumps when gg catches up to gogpu’s wgpu line

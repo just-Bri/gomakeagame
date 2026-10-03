@@ -19,6 +19,18 @@ dir = "engine"
 env = { CGO_ENABLED = "0" }
 run = "go run ./examples/hello2d"
 
+[tasks.hello3d]
+description = "Run the engine gogpu+g3d smoke window"
+dir = "engine"
+env = { CGO_ENABLED = "0" }
+run = "go run ./examples/hello3d"
+
+[tasks.hello_ui]
+description = "Run the UI + tilemap smoke window"
+dir = "engine"
+env = { CGO_ENABLED = "0" }
+run = "go run ./examples/hello_ui"
+
 [tasks.engine-test]
 description = "Run engine unit tests (CGO off)"
 dir = "engine"
